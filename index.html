@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星雨祭 | 星殞分靈體 官方指令指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap');
+        
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-dark: #313338;
+            --discord-black: #1e1f22;
+            --neon-star: #ffea00;
+            --neon-purple: #a855f7;
+            --neon-blue: #00d2ff;
+        }
+
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            scroll-behavior: smooth; 
+            background-color: var(--discord-black);
+            color: #dbdee1;
+            overflow-x: hidden;
+        }
+
+        /* 霓虹背景動畫 */
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 30% 30%, #1a1c2c 0%, #0d0e12 100%);
+        }
+
+        .glass {
+            background: rgba(43, 45, 49, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .command-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .command-card:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--discord-blurple);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .command-tag {
+            font-family: 'JetBrains Mono', monospace;
+            background: #111214;
+            color: var(--neon-blue);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .sidebar-link {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-link:hover, .active-link {
+            background: linear-gradient(90deg, rgba(88, 101, 242, 0.1) 0%, transparent 100%);
+            color: white;
+            border-left-color: var(--discord-blurple);
+        }
+
+        @keyframes rotate-star {
+            0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 5px var(--neon-star)); }
+            50% { transform: rotate(180deg) scale(1.1); filter: drop-shadow(0 0 15px var(--neon-star)); }
+            100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 5px var(--neon-star)); }
+        }
+
+        .hero-icon { animation: rotate-star 6s linear infinite; }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid var(--neon-star);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .1em;
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--neon-star); } }
+
+        .glow-text-star { text-shadow: 0 0 10px rgba(255, 234, 0, 0.4); }
+    </style>
+</head>
+<body class="selection:bg-discord-blurple/30">
+
+    <div class="bg-animate"></div>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-72 discord-dark hidden lg:flex flex-col sticky top-0 h-screen border-r border-white/5 z-50 shadow-2xl">
+            <div class="p-10 text-center">
+                <div class="w-24 h-24 bg-gradient-to-tr from-yellow-400 to-orange-500 rounded-full mx-auto flex items-center justify-center hero-icon mb-6 shadow-[0_0_30px_rgba(255,234,0,0.3)] border-2 border-white/10">
+                    <i class="fa-solid fa-star text-5xl text-white"></i>
+                </div>
+                <h1 class="text-white text-2xl font-black tracking-widest glow-text-star">星雨祭</h1>
+                <p class="text-[10px] text-gray-500 mt-2 uppercase tracking-[0.2em]">星殞分靈體 Support</p>
+            </div>
+            
+            <nav class="flex-1 px-6 space-y-1 overflow-y-auto pb-6">
+                <a href="#hero" class="sidebar-link block py-3 px-4 rounded text-gray-400 font-bold">概覽首頁</a>
+                <div class="pt-8 pb-2 text-[10px] font-black text-gray-500 uppercase tracking-[0.25em] pl-4">功能模組</div>
+                <a href="#ai-role" class="sidebar-link block py-2 px-4 rounded text-purple-400">AI 智慧與對話角色</a>
+                <a href="#tracking" class="sidebar-link block py-2 px-4 rounded">動態情報監控</a>
+                <a href="#economy" class="sidebar-link block py-2 px-4 rounded">虛擬經濟系統</a>
+                <a href="#admin" class="sidebar-link block py-2 px-4 rounded">管理員工具</a>
+                <a href="#keyword" class="sidebar-link block py-2 px-4 rounded">標註通知系統</a>
+            </nav>
+
+            <div class="p-6 border-t border-white/5 text-center space-y-4">
+                <a href="https://discord.com/oauth2/authorize?client_id=867380654306885632&permissions=8&integration_type=0&scope=bot" target="_blank" 
+                   class="block bg-discord-blurple hover:bg-[#4752c4] text-white text-xs font-bold py-3 rounded-lg transition shadow-lg">
+                   <i class="fa-brands fa-discord mr-2"></i> 邀請機器人
+                </a>
+                <div>
+                    <p class="text-[10px] text-gray-500 mb-2 uppercase font-bold tracking-widest">開發聯絡方式</p>
+                    <div class="bg-black/20 rounded-lg p-3 border border-white/5">
+                        <p class="text-xs text-blue-400 font-mono">Discord: nico_yuxin0802</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1">
+            <!-- Hero -->
+            <section id="hero" class="relative py-28 px-8 overflow-hidden text-center">
+                <div class="relative z-10">
+                    <div class="inline-block mb-4 px-4 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 text-xs font-bold tracking-widest uppercase">
+                        Starfall Festival Edition
+                    </div>
+                    <div class="max-w-max mx-auto">
+                        <h2 class="text-5xl lg:text-7xl font-black text-white mb-8 tracking-tighter typewriter">星殞分靈體 官方指南</h2>
+                    </div>
+                    <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        打造 FFXIV 高度社群連動、AI 擬人化對話與穩定的 Twitter 監控環境。<br>
+                        點擊卡片即可快速複製指令至 Discord。
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <a href="https://discord.com/oauth2/authorize?client_id=867380654306885632&permissions=8&integration_type=0&scope=bot" target="_blank" 
+                           class="bg-discord-blurple hover:bg-[#4752c4] text-white px-10 py-4 rounded-xl font-bold transition flex items-center shadow-2xl scale-110 hover:scale-115">
+                            <i class="fa-brands fa-discord mr-2 text-xl"></i> 授權進入伺服器
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Bar -->
+            <div class="px-8 max-w-5xl mx-auto -mt-10 mb-20 relative z-20">
+                <div class="glass p-3 rounded-2xl flex items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-white/5">
+                    <i class="fa-solid fa-sparkles ml-4 text-yellow-400"></i>
+                    <input type="text" id="cmdSearch" placeholder="搜尋功能與指令... (輸入如：對話、角色、轉帳)" 
+                           class="bg-transparent border-none focus:ring-0 w-full px-4 py-3 text-white placeholder:text-gray-600">
+                </div>
+            </div>
+
+            <div class="px-8 max-w-5xl mx-auto space-y-32 pb-32">
+                
+                <!-- AI 智慧與對話角色 -->
+                <section id="ai-role">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-600/20 flex items-center justify-center text-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.3)] border border-purple-500/20">
+                            <i class="fa-solid fa-headset text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-4xl font-black text-white">AI 智慧與對話角色</h3>
+                            <p class="text-gray-500 text-sm mt-1">自定義對話身分，讓 AI 的回應具備專屬靈魂。</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="command-card glass p-8 rounded-2xl border-l-4 border-purple-500 group">
+                            <span class="command-tag">/對話</span>
+                            <h4 class="text-white mt-4 font-bold text-lg">核心語意對話</h4>
+                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">啟動 Gemini AI 對談。結合「角色扮演系統」指令設定身分，AI 將展現對應的性格與記憶。</p>
+                        </div>
+                        <div class="command-card glass p-8 rounded-2xl border-l-4 border-pink-500">
+                            <span class="command-tag">/currentcharacter</span>
+                            <h4 class="text-white mt-4 font-bold text-lg">目前角色查詢</h4>
+                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">即時查詢當前 `/對話` 中使用的角色資訊與人設狀態。</p>
+                        </div>
+                        
+                        <!-- 角色扮演系統子指令 -->
+                        <div class="md:col-span-2">
+                            <div class="p-4 mb-4 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-bold tracking-widest uppercase">
+                                專屬角色扮演控制系統 (Roleplay System)
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="command-card glass p-5 rounded-xl">
+                                    <span class="command-tag">/setcharacter</span>
+                                    <p class="text-gray-400 text-xs mt-3">設定目前對話中要扮演的角色身分。</p>
+                                </div>
+                                <div class="command-card glass p-5 rounded-xl">
+                                    <span class="command-tag">/addcharacter</span>
+                                    <p class="text-gray-400 text-xs mt-3">新增一組自定義的對話角色範本。</p>
+                                </div>
+                                <div class="command-card glass p-5 rounded-xl">
+                                    <span class="command-tag">/listcharacters</span>
+                                    <p class="text-gray-400 text-xs mt-3">列出目前所有現有的角色清單。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="command-card glass p-4 rounded-xl border-dashed border-white/10">
+                                <span class="command-tag text-[10px]">/查看記憶</span>
+                            </div>
+                            <div class="command-card glass p-4 rounded-xl border-dashed border-white/10">
+                                <span class="command-tag text-[10px]">/記住我的話</span>
+                            </div>
+                            <div class="command-card glass p-4 rounded-xl border-dashed border-white/10">
+                                <span class="command-tag text-[10px]">/忘記我的話</span>
+                            </div>
+                            <div class="command-card glass p-4 rounded-xl border-dashed border-white/10">
+                                <span class="command-tag text-[10px]">/創作複製文</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 情報監控 -->
+                <section id="tracking">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-600/20 flex items-center justify-center text-orange-400 shadow-[0_0_20px_rgba(249,115,22,0.3)] border border-orange-500/20">
+                            <i class="fa-solid fa-tower-broadcast text-xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-black text-white">動態情報監控</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="command-card glass p-6 rounded-xl border-t-2 border-orange-500/20">
+                            <span class="command-tag">/setup_news</span>
+                            <h4 class="text-white mt-3 font-bold">FFXIV 公告同步</h4>
+                            <p class="text-gray-400 text-sm mt-1">自動同步繁中官網動態。使用者可指定接收頻道，並支援自動翻譯標題與內容。</p>
+                        </div>
+                        <div class="command-card glass p-6 rounded-xl border-t-2 border-orange-500/20">
+                            <span class="command-tag">/設定推特頻道</span>
+                            <h4 class="text-white mt-3 font-bold">X (Twitter) 追蹤</h4>
+                            <p class="text-gray-400 text-sm mt-1">追蹤指定帳號。當有新發文時自動轉發，維持社群資訊熱度。</p>
+                        </div>
+                        <div class="command-card glass p-6 rounded-xl">
+                            <span class="command-tag">/手動檢查推文</span>
+                            <p class="text-gray-400 text-sm mt-3">立即強制掃描最新推文，無視系統自動檢查週期。</p>
+                        </div>
+                        <div class="command-card glass p-6 rounded-xl">
+                            <span class="command-tag">/伺服器目前追蹤查詢</span>
+                            <p class="text-gray-400 text-sm mt-3">列出目前此伺服器正在監控的所有推特帳號。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 虛擬經濟系統 -->
+                <section id="economy">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-yellow-600/20 flex items-center justify-center text-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.3)] border border-yellow-500/20">
+                            <i class="fa-solid fa-coins text-xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-black text-white">虛擬經濟與樂園</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="command-card glass p-5 rounded-xl border-t-2 border-yellow-500/30">
+                            <span class="command-tag">/查詢星蝶幣</span>
+                            <p class="text-gray-400 text-xs mt-3">個人錢包餘額與排行榜查詢。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl border-t-2 border-yellow-500/30">
+                            <span class="command-tag">/伺服器轉帳</span>
+                            <p class="text-gray-400 text-xs mt-3">與社群成員進行星蝶幣交互轉帳。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl border-t-2 border-yellow-500/30">
+                            <span class="command-tag">/星蝶樂園</span>
+                            <p class="text-gray-400 text-xs mt-3">進入綜合互動遊戲主選單。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/仙人微彩</span>
+                            <p class="text-gray-400 text-xs mt-3">FFXIV 金碟小仙人彩刮刮樂模擬玩法。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/仙人仙彩</span>
+                            <p class="text-gray-400 text-xs mt-3">每週定期開獎的大仙人彩系統。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/運勢</span>
+                            <p class="text-gray-400 text-xs mt-3">查看每日運勢建議與幸運數值。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl md:col-span-2 border border-blue-500/20 bg-blue-500/5">
+                            <span class="command-tag text-blue-300">/狼人殺設定</span>
+                            <p class="text-gray-400 text-xs mt-3 font-bold">初始頻道設定與遊戲底層參數配置專用指令。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/俄羅斯輪盤</span>
+                            <p class="text-gray-400 text-xs mt-3">輸贏戰報可指定頻道發送。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 管理員工具 -->
+                <section id="admin">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-600/20 flex items-center justify-center text-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)] border border-blue-500/20">
+                            <i class="fa-solid fa-user-shield text-xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-black text-white">管理員自動化工具</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/ticket_setup</span>
+                            <p class="text-gray-400 text-xs mt-2">部署專業客服票券與回報頻道。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/設定自動身分組</span>
+                            <p class="text-gray-400 text-xs mt-2">新成員入群自動角色賦權管理。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/日誌設定</span>
+                            <p class="text-gray-400 text-xs mt-2">開啟伺服器審核日誌與異動紀錄。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/新增投票</span>
+                            <p class="text-gray-400 text-xs mt-2">發起投票並管理結算結果。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/匯出訊息</span>
+                            <p class="text-gray-400 text-xs mt-2">歷史訊息備份成可下載文件。</p>
+                        </div>
+                        <div class="command-card glass p-5 rounded-xl">
+                            <span class="command-tag">/設定歡迎</span>
+                            <p class="text-gray-400 text-xs mt-2">自訂成員進群通知與歡迎圖文。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 標註通知 -->
+                <section id="keyword">
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)] border border-cyan-500/20">
+                            <i class="fa-solid fa-tag text-xl"></i>
+                        </div>
+                        <h3 class="text-4xl font-black text-white">標註與關鍵字系統</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="command-card glass p-8 rounded-2xl">
+                            <span class="command-tag">/關鍵字標註</span>
+                            <p class="text-gray-400 text-sm mt-4">訂閱感興趣的關鍵字，有人提到時自動 Tag 提醒。</p>
+                        </div>
+                        <div class="command-card glass p-8 rounded-2xl">
+                            <span class="command-tag">/全局關鍵字</span>
+                            <p class="text-gray-400 text-sm mt-4">管理個人在各伺服器中設定的全局標註清單。</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-12 right-12 glass px-8 py-5 rounded-[1.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] translate-y-20 opacity-0 transition-all duration-500 z-[100] border-l-4 border-yellow-400">
+        <p class="text-white font-black tracking-wide" id="toastMsg">指令已成功複製</p>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('cmdSearch');
+        const cards = document.querySelectorAll('.command-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if(text.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        cards.forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                const tag = card.querySelector('.command-tag');
+                if(!tag) return;
+                
+                const cmdText = tag.innerText;
+                const el = document.createElement('textarea');
+                el.value = cmdText;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                
+                showToast(`已複製指令: ${cmdText}`);
+            });
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-link');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
